@@ -65,19 +65,24 @@ const SearchBar = () => {
             </p>
           </div>
         </div>
-      </div>
 
-      {/* searched cities for small device*/}
-      <div className=" md:hidden columns-3 mt-3 px-10">
-        {Array.from({ length: 3 }).map((item, index) => (
-          <div
-            key={index}
-            className=" cursor-pointer flex items-center justify-between gap-2 w-auto bg-custom-color/30 hover:bg-custom-color/80 backdrop-blur-sm rounded-md p-2 text-white transition-all ease-in duration-300 "
-          >
-            <h1>Dhaka</h1>
-            <p>31°</p>
+        {/* searched cities for small device*/}
+        <div className=" md:hidden mt-3 space-y-1">
+          <div className=" text-white text-sm ">
+            <span>Recent searches... </span>
           </div>
-        ))}
+          <div className=" columns-3">
+            {Array.from({ length: 3 }).map((item, index) => (
+              <div
+                key={index}
+                className=" cursor-pointer flex items-center justify-between gap-2 bg-custom-color/30 hover:bg-custom-color/80 backdrop-blur-sm rounded-md p-2 text-white transition-all ease-in duration-300 "
+              >
+                <h1>Dhaka</h1>
+                <p>31°</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
