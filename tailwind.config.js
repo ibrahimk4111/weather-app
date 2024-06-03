@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors:{
+        "custom-color": "#0b3631"
+      },
       container: {
         center: true,
         padding: "1rem",
