@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 
-const NavBar:React.FC = () => {
+const NavBar: React.FC = () => {
   return (
     <div>
-      <h1>Weather</h1>
+      <div className="container">
+        <h1>Weather</h1>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

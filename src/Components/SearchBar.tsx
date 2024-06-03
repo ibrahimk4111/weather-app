@@ -22,9 +22,9 @@ const SearchBar = () => {
               name="address"
               type=" text "
               placeholder="Search for city..."
-              className=" w-full bg-custom-color/30 backdrop-blur-sm placeholder:text-slate-200 text-slate-200 p-2 rounded-l-md focus:ring-1 ring-slate-300 outline-none"
+              className=" w-full bg-custom-color/50 backdrop-blur-sm placeholder:text-slate-200 text-slate-200 p-2 rounded-l-md focus:ring-1 ring-slate-300 outline-none"
             />
-            <div className=" flex justify-center items-center cursor-pointer bg-custom-color/30 hover:bg-custom-color/60 rounded-r-md">
+            <div className=" flex justify-center items-center cursor-pointer bg-custom-color/30 hover:bg-custom-color/80 rounded-r-md">
               <CiSearch
                 strokeWidth={1}
                 className="text-white w-10 h-10 p-2 hover:scale-125 transition-all ease-in"

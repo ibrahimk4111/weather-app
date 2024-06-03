@@ -1,10 +1,10 @@
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { BsFillSunriseFill, BsSunsetFill } from "react-icons/bs";
 import { FaThermometerEmpty } from "react-icons/fa";
 import { FiWind } from "react-icons/fi";
 import { GiDew } from "react-icons/gi";
 import { MdVisibility } from "react-icons/md";
 import sunriseandsunset from "../../../public/assets/sunriseandsunset.svg";
+import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
 
 const TodayHighlights = () => {
   return (
@@ -19,13 +19,13 @@ const TodayHighlights = () => {
           </h1>
           <div className=" flex w-full gap-2 bg-custom-color/30 backdrop-blur-sm rounded-md px-3 py-2 lg:col-span-5 sm:col-span-6 col-span-12">
             <div className="w-full flex flex-col justify-between items-center ">
-              <BsFillSunriseFill size={35} fill=" yellow " />
+              <WiSunrise size={55}  />
               <span>Sunrise</span>
               <span className=" font-bold text-xl ">5:30</span>
             </div>
             <img src={sunriseandsunset} alt="sunrise and sunset" />
             <div className="w-full flex flex-col justify-between items-center ">
-              <BsSunsetFill size={35} fill=" orange " />
+              <WiSunset size={55} />
               <span>Sunset</span>
               <span className=" font-bold text-xl ">5:30</span>
             </div>
@@ -50,7 +50,7 @@ const TodayHighlights = () => {
           </div>
           <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md px-3 py-1 flex justify-between items-center ">
             <p className=" flex gap-2 items-center">
-              <AiOutlineExclamationCircle />
+              <WiHumidity size={20} />
               <span>Humidity</span>
             </p>
             <span className=" font-bold text-xl ">88%</span>
