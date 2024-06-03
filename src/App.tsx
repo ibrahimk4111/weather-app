@@ -1,11 +1,17 @@
 import './App.css'
+import MainDegreeShowCase from './Components/MainDegreeShowCase'
 import SearchBar from './Components/SearchBar'
+import rainy from '../public/rainy.jpg'
 
 function App() {
 
   return (
-    <div className=' bg-black/50 h-screen p-10'>
-      <SearchBar />  
+    <div className='relative h-screen p-10'>
+      <div className=' fixed top-0 left-0 overflow-hidden -z-50'>
+        <img src={rainy} alt="clear" className=' w-full h-full object-cover ' />
+      </div>
+      <SearchBar />
+      <MainDegreeShowCase />
     </div>
   )
 }
