@@ -1,7 +1,7 @@
 import './App.css'
 import MainDegreeShowCase from './Components/TodayWeather/MainDegreeShowCase'
 import SearchBar from './Components/SearchBar'
-import rainy from '../public/rainy.jpg'
+// import rainy from '../public/rainy.jpg'
 import HourlyForcast from './Components/HourlyForcast/HourlyForcast'
 import NavBar from './Components/NavBar'
 import NextDays from './Components/NextDays/NextDays'

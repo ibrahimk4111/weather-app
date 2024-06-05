@@ -4,7 +4,7 @@ import { BiCloudRain } from "react-icons/bi";
 const NextDays = () => {
   return (
     <div className="container mt-5">
-      <div className=" bg-custom-color/30 rounded-md p-5 space-y-3">
+      <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md p-5 space-y-3">
         <h1 className=" font-semibold uppercase text-2xl text-white ">
           Next 5 Days Forecast
         </h1>
