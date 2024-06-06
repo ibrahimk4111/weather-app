@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
-import { apiCallwithCity } from "./Redux/ApiCall";
 
 const SearchBar = () => {
-  useEffect(() => {
-    async function fetchedData() {
-      const data = await apiCallwithCity();
-      console.log("useEffect", data);
-    }
-    fetchedData();
-  }, []);
+
   const [toggleDegree, setToggleDegree] = useState<string | null>("c");
   return (
     <div>
@@ -41,7 +34,7 @@ const SearchBar = () => {
           </div>
 
           {/* searched cities */}
-          <div className=" gap-2 md:flex hidden">
+          <div className=" gap-2 md:flex hidden text-sm">
             {Array.from({ length: 5 }).map((item, index) => (
               <div
                 key={index}

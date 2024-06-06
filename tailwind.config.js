@@ -14,10 +14,9 @@ export default {
         padding: "1rem",
         screens: {
           sm: "100%",
-          md: "80%",
-          lg: "900px",
-          xl: "1050px",
-          xxl: "1100px",
+          md: "1050px",
+          lg: "1100px",
+          xxl: "1200px"
         },
       },
     },

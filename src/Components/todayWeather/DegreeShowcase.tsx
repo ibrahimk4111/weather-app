@@ -9,7 +9,7 @@ const DegreeShowcase = () => {
       <div className=" max-w-96 bg-custom-color/50 backdrop-blur-sm lg:col-span-4 col-span-12 p-5 rounded-md text-white flex flex-col justify-between gap-3">
         <div className=" flex gap-2 justify-start items-center ">
           <CiLocationOn />
-          <p className=" text-xl "> Dhaka, Bangladesh. </p>
+          <p className=" text-lg "> Dhaka, Bangladesh. </p>
         </div>
         <div className=" flex gap-2 justify-start items-center">
           <TbCalendar />
@@ -24,19 +24,19 @@ const DegreeShowcase = () => {
             <h1 className="relative text-7xl font-bold pr-3">
               21° <sup className=" absolute right-0 top-3 text-sm ">C</sup>
             </h1>
-            <p> RealFeel® 33° </p>
+            <p className=" text-sm "> RealFeel® 33° </p>
           </div>
         </div>
         <div className=" flex justify-between items-center ">
           <div className=" flex gap-2 items-center justify-center ">
             <BiUpArrowAlt size={20} />
             <h1>MAX</h1>
-            <p className=" font-bold text-3xl ">38°</p>
+            <p className=" font-bold text-xl ">38°</p>
           </div>
           <div className=" flex gap-2 items-center justify-center ">
             <BiDownArrowAlt size={20} />
             <h1>MIN</h1>
-            <p className=" font-bold text-3xl ">18°</p>
+            <p className=" font-bold text-xl ">18°</p>
           </div>
         </div>
       </div>
