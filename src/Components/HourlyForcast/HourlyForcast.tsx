@@ -64,8 +64,8 @@ const HourlyForcast = () => {
             >
               <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="1%" stopColor="orange" stopOpacity={0.8} />
-                  <stop offset="45%" stopColor="green" stopOpacity={0.5} />
+                  <stop offset="5%" stopColor="orange" stopOpacity={0.8} />
+                  <stop offset="45%" stopColor="yellow" stopOpacity={0.3} />
                 </linearGradient>
               </defs>
               <XAxis
