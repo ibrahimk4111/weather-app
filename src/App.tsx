@@ -15,7 +15,7 @@ export interface storedDataType {
 }
 
 function App() {
-  const [storedData, setStoredData] = useState<storedDataType[]>([]);
+  // const [storedData, setStoredData] = useState<storedDataType[]>([]);
 
   const [city, setCity] = useState<string>("Dhaka");
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
@@ -24,29 +24,9 @@ function App() {
     const fetchData = async () => {
       const fullData = await getWeather(city, units);
       setData(fullData);
-      const cityExist = storedData.some(
-        (data) => data.city.toLowerCase() == city.toLowerCase()
-      );
-      if (!cityExist) {
-        setStoredData([...storedData, { city, fullData }]);
-      }
-      if(storedData.length >= 2){
-        setStoredData(prev=>prev.slice(2, 3))
-
-      }
     };
     fetchData();
   }, [city, units]);
-
-  useEffect(() => {
-    // Set up the interval to clear storedData every 10 minutes (600000 ms)
-    const interval = setInterval(() => {
-      setStoredData([]);
-    }, 600000); // 600000 ms = 10 minutes
-
-    // Clean up the interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
 
 
   return (
@@ -61,7 +41,6 @@ function App() {
       <NavBar />
       <SearchBar
         setCity={setCity}
-        storedData={storedData}
         setUnits={setUnits}
       />
       <MainDegreeShowCase data={data} />

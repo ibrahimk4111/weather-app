@@ -1,17 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
-import { storedDataType } from "../App";
-
 interface IProps {
-  // city: string;
   setCity: React.Dispatch<React.SetStateAction<string>>;
-  storedData: storedDataType[];
   setUnits: React.Dispatch<React.SetStateAction<"metric" | "imperial">>;
-  // setStoredData: React.Dispatch<React.SetStateAction<storedDataType>>
 }
 
-const SearchBar = ({ setCity, storedData, setUnits }: IProps) => {
+const SearchBar = ({ setCity, setUnits }: IProps) => {
   const [toggleDegree, setToggleDegree] = useState<"metric" | "imperial">(
     "metric"
   );
@@ -66,20 +61,6 @@ const SearchBar = ({ setCity, storedData, setUnits }: IProps) => {
             </button>
           </form>
 
-          {/* searched cities */}
-          <div className=" gap-2 md:flex hidden text-sm">
-            {storedData &&
-              storedData.map((item, index) => (
-                <div
-                  key={index}
-                  className=" cursor-pointer flex items-center justify-between gap-2 h-10 w-auto bg-custom-color/30 hover:bg-custom-color/80 backdrop-blur-sm rounded-md p-2 text-white transition-all ease-in duration-300 "
-                >
-                  <h1>{item.city}</h1>
-                  <p>{item.fullData.temp}°</p>
-                </div>
-              ))}
-          </div>
-
           {/* Fahrenheit (°F) Celsius (°C) */}
           <div className=" flex text-white">
             <p
@@ -105,24 +86,6 @@ const SearchBar = ({ setCity, storedData, setUnits }: IProps) => {
           </div>
         </div>
 
-        {/* searched cities for small device*/}
-        <div className=" md:hidden mt-3 space-y-1">
-          <div className=" text-white text-sm ">
-            <span>Recent searches... </span>
-          </div>
-          <div className=" columns-3">
-            {storedData.length <= 4 &&
-              storedData.map((item, index) => (
-                <div
-                  key={index}
-                  className=" cursor-pointer flex items-center justify-between gap-2 bg-custom-color/30 hover:bg-custom-color/80 backdrop-blur-sm rounded-md p-2 text-white transition-all ease-in duration-300 "
-                >
-                  <h1>{item.city}</h1>
-                  <p>{item.fullData.temp}°</p>
-                </div>
-              ))}
-          </div>
-        </div>
       </div>
     </div>
   );
