@@ -38,7 +38,7 @@ interface HourlyResponse {
 }
 
 interface HourlyData {
-  dt_txt: string;
+  dt: number;
   main: {
     temp: number;
     temp_max: number;
@@ -57,6 +57,16 @@ interface AirPollutionData {
       aqi: number;
     };
   }[];
+}
+
+export interface hourlyStatementsData {
+  dateFromHourly: number;
+  temp: number;
+  temp_max: number;
+  temp_min: number;
+  description: string;
+  iconForHourlyUrl: string;
+  HourlyCondition: string;
 }
 
 export interface FullWeatherData {
@@ -79,15 +89,7 @@ export interface FullWeatherData {
   cityCondition: string;
   airPollution: number;
   speed: number;
-  hourlyStatementsData: {
-    dt_txt: string;
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-    description: string;
-    icon: string;
-    HourlyCondition: string;
-  }[];
+  hourlyStatementsData: hourlyStatementsData[];
   units: string;
 }
 
@@ -120,6 +122,7 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const hourlyStatement = (await apiCall("forecast", { lat, lon, units })) as HourlyResponse;
   const airPollutionStatement = (await apiCall("air_pollution", { lat, lon, units })) as AirPollutionData;
 
+  console.log({hourlyStatement})
   // Data from air pollution statement
   const { main: airCondition } = airPollutionStatement.list[0];
   const airPollution = airCondition.aqi;
@@ -128,16 +131,18 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const { city: cityName, list } = hourlyStatement;
   const { name } = cityName;
   const hourlyStatementsData = list.map((item) => {
-    const { dt_txt, main, weather } = item;
+    const { dt:dateFromHourly, main, weather } = item;
     const { temp, temp_max, temp_min } = main;
     const { description, icon, main: HourlyCondition } = weather[0];
+    const iconForHourlyUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
+
     return {
-      dt_txt,
+      dateFromHourly,
       temp,
       temp_max,
       temp_min,
       description,
-      icon,
+      iconForHourlyUrl,
       HourlyCondition,
     };
   });

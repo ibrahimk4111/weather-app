@@ -28,6 +28,7 @@ function App() {
     fetchData();
   }, [city, units]);
 
+  console.log({data})
 
   return (
     <div className="relative min-h-screen py-5">
@@ -45,7 +46,7 @@ function App() {
       />
       <MainDegreeShowCase data={data} />
       <HourlyForcast />
-      <NextDays />
+      <NextDays data={data} />
     </div>
   );
 }
