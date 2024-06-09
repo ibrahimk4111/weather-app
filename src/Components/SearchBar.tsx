@@ -17,9 +17,10 @@ const SearchBar = ({ setCity, setUnits }: IProps) => {
       setInputeText(text);
     }
   };
-  const formHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCity(inputText);
+    setInputeText("")
   };
 
   const toggleHandler = (unit:"metric" | "imperial") =>{
@@ -40,7 +41,7 @@ const SearchBar = ({ setCity, setUnits }: IProps) => {
       <div className=" container ">
         <div className=" flex justify-between items-center gap-5">
           <form
-            onSubmit={formHandler}
+            onSubmit={submitHandler}
             className=" flex items-center justify-start w-full"
           >
             <input

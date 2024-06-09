@@ -40,12 +40,12 @@ const NextDays = ({ data }: IProps) => {
               {nextFiveDayData.map((item, index) => (
                 <div
                   key={index}
-                  className="min-w-48 w-full bg-custom-color p-2 rounded-md text-white "
+                  className="mb-2 min-w-40 w-full bg-custom-color/50 backdrop-blur-sm p-2 rounded-md text-white "
                 >
                   <div className=" flex justify-between">
-                    <div className=" flex flex-col justify-center items-center">
-                      <h1 className=" text-lg ">{date(item.dateFromHourly)}</h1>
-                      <div className=" bg-gradient-to-tl from-red-500 via-tomato-400 to-yellow-500 rounded-full w-16 h-16">
+                    <div className=" flex flex-col justify-center items-center gap-1">
+                      <h1 className=" ">{date(item.dateFromHourly)}</h1>
+                      <div className=" bg-gradient-to-tl from-red-500 via-tomato-400 to-yellow-500 rounded-full w-12 h-12">
                         <img
                           src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
                           alt={item.description}
@@ -54,14 +54,14 @@ const NextDays = ({ data }: IProps) => {
                     </div>
                     <div className=" flex flex-col justify-between ">
                       <div className=" flex gap-1 items-center justify-end ">
-                        <p className=" font-bold ">{item.temp_max}°</p>
+                        <p className=" font-semibold ">{item.temp_max}°</p>
                       </div>
                       <div className=" flex gap-1 items-center justify-end ">
-                        <p className=" font-bold ">{item.temp_min}°</p>
+                        <p className=" font-semibold ">{item.temp_min}°</p>
                       </div>
                     </div>
                   </div>
-                  <p className=" text-center text-sm ">{item.description}</p>
+                  <p className=" text-center text-sm mt-2 ">{item.description}</p>
                 </div>
               ))}
             </div>

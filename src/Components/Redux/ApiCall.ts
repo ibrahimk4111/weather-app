@@ -124,7 +124,7 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const hourlyStatement = (await apiCall("forecast", { lat, lon, units })) as HourlyResponse;
   const airPollutionStatement = (await apiCall("air_pollution", { lat, lon, units })) as AirPollutionData;
 
-  console.log({weatherStatement, hourlyStatement, airPollutionStatement})
+  // console.log({weatherStatement, hourlyStatement, airPollutionStatement})
   // Data from air pollution statement
   const { main: airCondition } = airPollutionStatement.list[0];
   const airPollution = airCondition.aqi;
