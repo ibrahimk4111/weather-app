@@ -39,7 +39,9 @@ interface HourlyResponse {
 
 interface HourlyData {
   dt: number;
-  dt_txt: string;
+  dt_txt:string;
+  splitedDateFromHourly:string;
+  splitedTimeFromHourly:string;
   main: {
     temp: number;
     temp_max: number;
@@ -62,7 +64,8 @@ interface AirPollutionData {
 
 export interface hourlyStatementsData {
   dateFromHourly: number;
-  dt_txt: string;
+  splitedDateFromHourly:string;
+  splitedTimeFromHourly:string;
   temp: number;
   temp_max: number;
   temp_min: number;
@@ -134,12 +137,15 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const { name } = cityName;
   const hourlyStatementsData = list.map((item) => {
     const { dt:dateFromHourly, dt_txt, main, weather } = item;
+    const splitedDateFromHourly = dt_txt.split(" ")[0]
+    const splitedTimeFromHourly = dt_txt.split(" ")[1].split(":").slice(0,2).join(":")
     const { temp, temp_max, temp_min } = main;
     const { description, icon, main: HourlyCondition } = weather[0];
 
     return {
       dateFromHourly,
-      dt_txt,
+      splitedDateFromHourly,
+      splitedTimeFromHourly,
       temp,
       temp_max,
       temp_min,

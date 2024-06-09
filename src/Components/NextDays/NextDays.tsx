@@ -20,8 +20,7 @@ const NextDays = ({ data }: IProps) => {
     // nextFiveDayData = hourlyStatementsData;
     for (let i = 0; i < hourlyStatementsData.length - 1; i++) {
       if (
-        hourlyStatementsData[i].dt_txt.split(" ")[0] !==
-        hourlyStatementsData[i + 1].dt_txt.split(" ")[0]
+        hourlyStatementsData[i].splitedDateFromHourly !== hourlyStatementsData[i + 1].splitedDateFromHourly
       ) {
         nextFiveDayData.push(hourlyStatementsData[i]);
       }
