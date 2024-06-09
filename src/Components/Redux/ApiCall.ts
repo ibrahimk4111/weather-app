@@ -39,6 +39,7 @@ interface HourlyResponse {
 
 interface HourlyData {
   dt: number;
+  dt_txt: string;
   main: {
     temp: number;
     temp_max: number;
@@ -61,11 +62,12 @@ interface AirPollutionData {
 
 export interface hourlyStatementsData {
   dateFromHourly: number;
+  dt_txt: string;
   temp: number;
   temp_max: number;
   temp_min: number;
   description: string;
-  iconForHourlyUrl: string;
+  icon: string;
   HourlyCondition: string;
 }
 
@@ -85,7 +87,7 @@ export interface FullWeatherData {
   temp_max: number;
   temp_min: number;
   description: string;
-  iconUrl: string;
+  icon: string;
   cityCondition: string;
   airPollution: number;
   speed: number;
@@ -122,7 +124,7 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const hourlyStatement = (await apiCall("forecast", { lat, lon, units })) as HourlyResponse;
   const airPollutionStatement = (await apiCall("air_pollution", { lat, lon, units })) as AirPollutionData;
 
-  console.log({hourlyStatement})
+  console.log({weatherStatement, hourlyStatement, airPollutionStatement})
   // Data from air pollution statement
   const { main: airCondition } = airPollutionStatement.list[0];
   const airPollution = airCondition.aqi;
@@ -131,18 +133,18 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const { city: cityName, list } = hourlyStatement;
   const { name } = cityName;
   const hourlyStatementsData = list.map((item) => {
-    const { dt:dateFromHourly, main, weather } = item;
+    const { dt:dateFromHourly, dt_txt, main, weather } = item;
     const { temp, temp_max, temp_min } = main;
     const { description, icon, main: HourlyCondition } = weather[0];
-    const iconForHourlyUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
 
     return {
       dateFromHourly,
+      dt_txt,
       temp,
       temp_max,
       temp_min,
       description,
-      iconForHourlyUrl,
+      icon,
       HourlyCondition,
     };
   });
@@ -155,7 +157,6 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
   const { description, icon, main: cityCondition } = weather[0];
   const { speed } = wind;
 
-  const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
 
   return {
     name,
@@ -173,7 +174,7 @@ export const getWeather = async (city: string, units: "metric" | "imperial" ): P
     temp_max,
     temp_min,
     description,
-    iconUrl,
+    icon,
     cityCondition,
     airPollution,
     speed,

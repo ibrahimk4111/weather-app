@@ -50,17 +50,17 @@ const data = [
 const HourlyForcast = () => {
   return (
     <div className="container mt-5">
-      <div className=" bg-custom-color/80 backdrop-blur-sm rounded-md p-5 space-y-3">
-        <h1 className=" font-semibold uppercase text-xl text-white ">
+      <div >
+        <h1 className=" font-semibold uppercase text-white mb-2 ">
           Hourly Forecast
         </h1>
-        <div style={{ width: "100%", height: "40vh" }}>
+        <div style={{ width: "100%", height: "30vh" }} className=" rounded-md bg-custom-color p-2">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               // width={1050}
               // height={450}
               data={data}
-              margin={{ top: 20, right: 0, left: 0, bottom: 20 }}
+              margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
             >
               <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -71,13 +71,13 @@ const HourlyForcast = () => {
               <XAxis
                 dataKey="name"
                 tick={{ fill: "white" }}
-                tickMargin={15}
+                tickMargin={5}
                 axisLine={{ stroke: "white", strokeWidth: 3 }}
               />
               <YAxis
                 dataKey={"c"}
                 stroke="white"
-                tickMargin={20}
+                tickMargin={5}
                 axisLine={{ stroke: "white", strokeWidth: 3 }}
               />
               {/* <CartesianGrid strokeDasharray="3 3" /> */}

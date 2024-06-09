@@ -28,10 +28,8 @@ function App() {
     fetchData();
   }, [city, units]);
 
-  console.log({data})
-
   return (
-    <div className="relative min-h-screen py-5">
+    <div className="relative min-h-screen py-3">
       <div className=" fixed top-0 left-0 overflow-hidden -z-50">
         <img
           src={clear}

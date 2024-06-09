@@ -1,9 +1,9 @@
-import { WeatherData } from "../../App";
+import { FullWeatherData } from "../Redux/ApiCall";
 import DegreeShowcase from "./DegreeShowcase";
 import TodayHighlights from "./TodayHighlights";
 
 interface IProps {
-  data: WeatherData | null;
+  data: FullWeatherData | null;
 }
 
 const MainDegreeShowCase = ({data}: IProps) => {
@@ -11,7 +11,7 @@ const MainDegreeShowCase = ({data}: IProps) => {
     <div className=" mt-3 ">
       <div className=" container grid grid-cols-12 gap-5">
         <DegreeShowcase data={data} />
-        <TodayHighlights />
+        <TodayHighlights data={data}  />
       </div>
     </div>
   );

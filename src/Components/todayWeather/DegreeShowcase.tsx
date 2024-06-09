@@ -7,6 +7,27 @@ interface IProps {
   data: FullWeatherData | null;
 }
 
+const iconMap: { [key: string]: string } = {
+  "01d": "wi-day-sunny",
+  "01n": "wi-night-clear",
+  "02d": "wi-day-cloudy",
+  "02n": "wi-night-alt-cloudy",
+  "03d": "wi-cloud",
+  "03n": "wi-cloud",
+  "04d": "wi-cloudy",
+  "04n": "wi-cloudy",
+  "09d": "wi-showers",
+  "09n": "wi-showers",
+  "10d": "wi-day-rain",
+  "10n": "wi-night-rain",
+  "11d": "wi-thunderstorm",
+  "11n": "wi-thunderstorm",
+  "13d": "wi-snow",
+  "13n": "wi-snow",
+  "50d": "wi-fog",
+  "50n": "wi-fog",
+};
+
 const DegreeShowcase = ({ data }: IProps) => {
   let date;
   if (!data) {
@@ -19,6 +40,7 @@ const DegreeShowcase = ({ data }: IProps) => {
       month: "long",
     });
   }
+
 
   return (
     <>
@@ -38,12 +60,15 @@ const DegreeShowcase = ({ data }: IProps) => {
           </div>
           <hr className=" border border-white/30 " />
           <div className=" flex items-center justify-between">
-            <img src={data.iconUrl} alt="icon" className=" bg-white rounded-md" />
-            {/* <BiCloud className=" h-28 w-28" /> */}
+            <div className=" flex justify-center items-center" >
+              <i className={`wi ${iconMap[data.icon]} text-6xl`}></i>
+            </div>
             <div className=" space-y-1">
               <h1 className="relative text-7xl font-bold pr-3">
                 {Math.ceil(data.temp)}°{" "}
-                <sup className=" absolute right-0 top-3 text-sm ">{data.units == "metric"? "C": "F"}</sup>
+                <sup className=" absolute right-0 top-3 text-sm ">
+                  {data.units == "metric" ? "C" : "F"}
+                </sup>
               </h1>
               <p className=" text-sm "> RealFeel® {data.feels_like}° </p>
             </div>
