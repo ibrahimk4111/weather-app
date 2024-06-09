@@ -43,8 +43,8 @@ function App() {
         setUnits={setUnits}
       />
       <MainDegreeShowCase data={data} />
-      <HourlyForcast data={data} />
       <NextDays data={data} />
+      <HourlyForcast data={data} />
     </div>
   );
 }
