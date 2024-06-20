@@ -6,49 +6,11 @@ import {
   Tooltip,
   XAxis,
 } from "recharts";
-import { FullWeatherData, hourlyStatementsData } from "../Redux/ApiCall";
+import { hourlyStatementsData } from "../../utils/interfaces";
 
-// const data = [
-//   {
-//     name: "12 PM",
-//     uv: 80,
-//     c: 1,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 90,
-//     c: 80,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 95,
-//     c: 65,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 60,
-//     c: 70,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 70,
-//     c: 82,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 90,
-//     c: 46,
-//   },
-//   {
-//     name: "12 PM",
-//     uv: 100,
-//     c: 10,
-//   },
-// ];
-
-interface IProps {
-  data: FullWeatherData | null;
-}
+// interface IProps {
+//   data: FullWeatherData | null;
+// }
 
 interface CustomDotProps extends DotProps {
   payload: {
@@ -68,7 +30,7 @@ const CustomDot: React.FC<CustomDotProps> = (props) => {
   );
 };
 
-const HourlyForcast = ({ data }: IProps) => {
+const HourlyForcast = () => {
   const couter = 5;
   let hourlyStatementsData: hourlyStatementsData[] = [];
   if (!data) {

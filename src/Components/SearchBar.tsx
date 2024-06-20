@@ -1,15 +1,22 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
-interface IProps {
-  setCity: React.Dispatch<React.SetStateAction<string>>;
-  setUnits: React.Dispatch<React.SetStateAction<"metric" | "imperial">>;
-}
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../Redux/createStore";
+import { fetchData } from "../Redux/fetchData";
 
-const SearchBar = ({ setCity, setUnits }: IProps) => {
-  const [toggleDegree, setToggleDegree] = useState<"metric" | "imperial">(
-    "metric"
-  );
+const SearchBar = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [city, setCity] = useState<string>("Dhaka");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [units, setUnits] = useState<"metric" | "imperial">("metric");
+
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(()=>{
+    dispatch(fetchData({city, units}))
+  }, [dispatch, city, units])
+
+  const [toggleDegree, setToggleDegree] = useState<"metric" | "imperial">("metric");
   const [inputText, setInputeText] = useState<string>("");
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target) {
