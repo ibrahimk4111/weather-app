@@ -6,9 +6,7 @@ import { AppDispatch } from "../Redux/createStore";
 import { fetchData } from "../Redux/fetchData";
 
 const SearchBar = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [city, setCity] = useState<string>("Dhaka");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
 
   const dispatch = useDispatch<AppDispatch>();
