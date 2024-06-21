@@ -3,9 +3,10 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CiLocationOn } from "react-icons/ci";
 import { TbCalendar } from "react-icons/tb";
 // import { stateType } from "../../Redux/weatherSlice";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/createStore";
-
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/createStore";
+import { timeAndDateWithTimestampAndTimezone } from "../../utils/timeCalcultion";
+import { fetchData } from "../../Redux/fetchData";
 
 const iconMap: { [key: string]: string } = {
   "01d": "wi-day-sunny",
@@ -29,76 +30,70 @@ const iconMap: { [key: string]: string } = {
 };
 
 const DegreeShowcase = () => {
-  const data = useSelector((state:RootState)=>state.weather)
+  const dispatch = useDispatch<AppDispatch>();
+  const data = useSelector((state: RootState) => state.weather);
 
   if (data?.status === "loading") {
     <div>Loading....</div>;
   }
-  
+
   if (data?.status === "failed") {
-    throw new Error("data fetching failed");
+    alert("Enter a valid city name")
+    dispatch(fetchData({city:"Dhaka", units:"metric"}))
   }
-  
 
-    const {weatherStatement}:any = data && data.weatherData
-    
-    const date = new Date( weatherStatement && weatherStatement.dt * 1000).toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      day: "numeric",
-      month: "long",
-    });
-
-
+  const { weatherStatement }: any = data.weatherData;
+  const dateAndTime = timeAndDateWithTimestampAndTimezone(weatherStatement?.dt, weatherStatement?.timezone)
   return (
-    <div className=" max-w-96 bg-custom-color/50 backdrop-blur-sm lg:col-span-4 col-span-12 p-5 rounded-md text-white flex flex-col justify-between gap-3">
+    <div className=" max-w-96 bg-custom-color/30 backdrop-blur-sm lg:col-span-4 col-span-12 p-5 rounded-md text-white flex flex-col justify-between gap-3">
       {/* cols-span-4 left bar */}
       {data.status === "loading" ? (
-        <h1 >
-          Loading...
-        </h1>
-      ) : ( weatherStatement && (
-        <div className=" flex flex-col justify-between gap-3">
-          <div className=" flex gap-2 justify-start items-center ">
-            <CiLocationOn />
-            <p className=" text-lg ">
-              {" "}
-              {weatherStatement.name}, {weatherStatement.country}{" "}
-            </p>
-          </div>
-          <div className=" flex gap-2 justify-start items-center">
-            <TbCalendar />
-            <p>{date}</p>
-          </div>
-          <hr className=" border border-white/30 " />
-          <div className=" flex items-center justify-between">
-            <div className=" flex justify-center items-center">
-              <i className={`wi ${iconMap[weatherStatement.weather[0].icon]} text-6xl`}></i>
+        <h1>Loading...</h1>
+      ) : (
+        weatherStatement && (
+          <div className=" flex flex-col justify-between gap-3">
+            <div className=" flex gap-2 justify-start items-center ">
+              <CiLocationOn />
+              <p className=" text-lg ">
+                {weatherStatement.name}, {weatherStatement.country}
+              </p>
             </div>
-            <div className=" space-y-1">
-              <h1 className="relative text-7xl font-bold pr-3">
-                {Math.ceil(weatherStatement.main.temp)}°{" "}
-                <sup className=" absolute right-0 top-3 text-sm ">
-                  {weatherStatement.units == "metric" ? "C" : "F"}
-                </sup>
-              </h1>
-              <p className=" text-sm "> RealFeel® {weatherStatement.feels_like}° </p>
+            <div className=" flex gap-2 justify-start items-center">
+              <TbCalendar />
+              <p>{dateAndTime}</p>
+            </div>
+            <hr className=" border border-white/30 " />
+            <div className=" flex items-center justify-between">
+              <div className=" flex justify-center items-center">
+                <i className={`wi ${ iconMap[weatherStatement.weather[0].icon]} text-6xl`}></i>
+              </div>
+              <div className=" space-y-1">
+                <h1 className="relative text-7xl font-bold pr-3">
+                  {Math.round(weatherStatement.main.temp)}°{" "}
+                  <sup className=" absolute right-0 top-3 text-sm ">
+                    {weatherStatement.units == "metric" ? "C" : "F"}
+                  </sup>
+                </h1>
+                <p className=" text-sm ">
+                  RealFeel® {weatherStatement.main.feels_like}°{" "}
+                </p>
+              </div>
+            </div>
+            <div className=" flex justify-between items-center ">
+              <div className=" flex gap-2 items-center justify-center ">
+                <BiUpArrowAlt size={16} />
+                <p>MAX</p>
+                <p className=" font-bold">{weatherStatement.main.temp_max}°</p>
+              </div>
+              <div className=" flex gap-2 items-center justify-center ">
+                <BiDownArrowAlt size={16} />
+                <p>MIN</p>
+                <p className=" font-bold">{weatherStatement.main.temp_min}°</p>
+              </div>
             </div>
           </div>
-          <div className=" flex justify-between items-center ">
-            <div className=" flex gap-2 items-center justify-center ">
-              <BiUpArrowAlt size={20} />
-              <h1>MAX</h1>
-              <p className=" font-bold text-xl ">{weatherStatement.main.temp_max}°</p>
-            </div>
-            <div className=" flex gap-2 items-center justify-center ">
-              <BiDownArrowAlt size={20} />
-              <h1>MIN</h1>
-              <p className=" font-bold text-xl ">{weatherStatement.main.temp_min}°</p>
-            </div>
-          </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };
