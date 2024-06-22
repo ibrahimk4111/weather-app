@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiCall } from "./apiCall";
+import { apiCall } from "../utils/apiCall";
 
 interface paramType {
   city: string; 

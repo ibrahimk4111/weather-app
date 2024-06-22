@@ -12,7 +12,7 @@ interface CitySuggestion {
 }
 
 const SearchBar = () => {
-  const status = useSelector((state:RootState)=>state.weather.status);
+  const data = useSelector((state:RootState)=>state.weather);
   const dispatch = useDispatch<AppDispatch>();
   const [inputText, setInputeText] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -23,11 +23,11 @@ const SearchBar = () => {
     const res = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=0fefc06467470fbdc6c6545407c150be`
     );
-    const data = await res.json();
-    if(status === 'succeed'){
+    const result = await res.json();
+    if(data?.status === 'succeed'){
       setSuggestions([])
     }
-    setSuggestions(data);
+    setSuggestions(result);
   };
 
   const inputHandler = async (e: ChangeEvent<HTMLInputElement>) => {
