@@ -23,4 +23,24 @@ export const fetchData = createAsyncThunk<any, paramType>("weather/fetchWeather"
       airPollutionStatement,
       units
     };
-  });
+  }
+);
+
+interface paramTypeforLatLong {
+  lat: number; 
+  lon: number;
+  units: "metric" | "imperial";
+}
+export const fetchDataWithLatLong = createAsyncThunk<any, paramTypeforLatLong>("weather/fetchWeather", async ({lat, lon, units}):Promise<any>=>{
+  const weatherStatement = await apiCall("weather", { lat, lon, units });
+  const hourlyStatement = await apiCall("forecast", { lat, lon, units });
+  const airPollutionStatement = await apiCall("air_pollution", { lat, lon, units });
+
+    return {
+      weatherStatement,
+      hourlyStatement, 
+      airPollutionStatement,
+      units
+    };
+  }
+);

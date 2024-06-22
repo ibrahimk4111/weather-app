@@ -4,14 +4,27 @@ import MainDegreeShowCase from "./Components/TodayWeather/MainDegreeShowCase";
 import SearchBar from "./Components/SearchBar";
 import NavBar from "./Components/NavBar";
 import NextDays from "./Components/NextDays/NextDays";
-import { useSelector } from "react-redux";
-import { RootState } from "./Redux/createStore";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "./Redux/createStore";
 import { weatherImages } from "./utils/backgroundImages";
 import { useEffect, useState } from "react";
+import { fetchData } from "./Redux/fetchData";
 function App() {
+  const dispatch = useDispatch<AppDispatch>()
   const [backgroundImage, setBackgroundImage] = useState<string>("");
-  const data = useSelector((state: RootState) => state.weather.weatherData);
-  const { weatherStatement }: any = data;
+  const data = useSelector((state: RootState) => state.weather);
+  const { weatherStatement }: any = data.weatherData;
+
+  if(weatherStatement?.status === "wrong url"){
+    dispatch(fetchData({city: "London", units: "metric"}))
+    console.log("1st call")
+  }
+
+  if (data?.status === "failed") {
+    dispatch(fetchData({city: "London", units: "metric"}))
+    console.log("2nd call")
+  }
+  
   const weatherCondition = weatherStatement?.weather[0]?.main as string;
 
   useEffect(() => {

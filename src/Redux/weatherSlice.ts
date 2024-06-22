@@ -16,7 +16,9 @@ const initialState: stateType = {
 export const weatherData = createSlice({
   name: "weather",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {

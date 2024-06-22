@@ -12,6 +12,7 @@ export const apiCall = async (searchType: string, searchParams: object): Promise
     const response = await fetch(url);
     if (!response.ok) {
       console.error(`Error: ${response.status} ${response.statusText}`);
+      return ({status: "wrong url"})
     }
     return await response.json();
   } catch (error) {

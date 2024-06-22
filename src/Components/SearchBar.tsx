@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { BiCurrentLocation } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/createStore";
 import { fetchData } from "../Redux/fetchData";
+import LocationFind from "./LocationFind";
 
 interface CitySuggestion {
   name: string;
@@ -63,12 +63,7 @@ const SearchBar = () => {
   return (
     <div className=" py-8 ">
       {/* current location icons for search */}
-      <div className=" z-[1000] fixed bottom-10 right-10 bg-green-500/40 backdrop-blur-sm text-white rounded-full p-2  ">
-        <BiCurrentLocation
-          size={25}
-          className=" cursor-pointer hover:scale-125 transition-all ease-in duration-500"
-        />
-      </div>
+      <LocationFind />  
 
       {/* city search bar */}
       <div className=" container ">

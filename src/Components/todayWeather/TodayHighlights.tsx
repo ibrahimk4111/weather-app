@@ -6,18 +6,11 @@ import { GiDew } from "react-icons/gi";
 import { MdVisibility } from "react-icons/md";
 import sunriseandsunset from "/assets/sunriseandsunset.svg";
 import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
-import { AppDispatch, RootState } from "../../Redux/createStore";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../Redux/fetchData";
+import {RootState } from "../../Redux/createStore";
+import {useSelector } from "react-redux";
 
 const TodayHighlights = () => {
   const data = useSelector((state: RootState) => state.weather);
-  const dispatch = useDispatch<AppDispatch>()
-
-  if (data?.status === "failed") {
-    dispatch(fetchData({city: "London", units: "metric"}))
-    console.log("2nd call")
-  }
 
   const { weatherStatement, airPollutionStatement, units }: any =
     data && data.weatherData;
