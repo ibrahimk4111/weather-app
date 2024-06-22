@@ -6,14 +6,17 @@ import { GiDew } from "react-icons/gi";
 import { MdVisibility } from "react-icons/md";
 import sunriseandsunset from "/assets/sunriseandsunset.svg";
 import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
-import { RootState } from "../../Redux/createStore";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/createStore";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../Redux/fetchData";
 
 const TodayHighlights = () => {
   const data = useSelector((state: RootState) => state.weather);
+  const dispatch = useDispatch<AppDispatch>()
 
   if (data?.status === "failed") {
-    throw new Error("data fetching failed");
+    dispatch(fetchData({city: "London", units: "metric"}))
+    console.log("2nd call")
   }
 
   const { weatherStatement, airPollutionStatement, units }: any =
@@ -45,10 +48,10 @@ const TodayHighlights = () => {
             </h1>
             <hr className=" border border-white/30 " />
             <div className=" grid grid-cols-12 gap-3">
-              <h1 className=" p-5 bg-custom-color/50 backdrop-blur-sm text-4xl rounded-lg font-semibold lg:col-span-7 sm:col-span-6 col-span-12 flex justify-center items-center">
+              <h1 className=" p-5 bg-custom-color/30 backdrop-blur-sm text-4xl rounded-lg font-semibold lg:col-span-7 sm:col-span-6 col-span-12 flex justify-center items-center">
                 {weatherStatement.weather[0].description}
               </h1>
-              <div className=" flex w-full gap-2 bg-custom-color/50 backdrop-blur-sm rounded-md px-3 py-2 lg:col-span-5 sm:col-span-6 col-span-12">
+              <div className=" flex w-full gap-2 bg-custom-color/30 backdrop-blur-sm rounded-md px-3 py-2 lg:col-span-5 sm:col-span-6 col-span-12">
                 <div className="w-full flex flex-col justify-between items-center ">
                   <WiSunrise size={55} />
                   <span className=" text-xs sm:text-sm ">Sunrise</span>
@@ -69,7 +72,7 @@ const TodayHighlights = () => {
 
             {/* highlights tabs */}
             <div className=" md:columns-3 columns-2 space-y-2 gap-1 md:gap-5">
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <AiOutlineExclamationCircle />
                   <span className=" text-xs sm:text-sm ">Air quality</span>
@@ -78,7 +81,7 @@ const TodayHighlights = () => {
                   {airPollutionStatement.list[0].main.aqi}
                 </span>
               </div>
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <FiWind />
                   <span className=" text-xs sm:text-sm ">Wind</span>
@@ -87,7 +90,7 @@ const TodayHighlights = () => {
                   {weatherStatement.wind.speed} km/h
                 </span>
               </div>
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <WiHumidity size={20} />
                   <span className=" text-xs sm:text-sm ">Humidity</span>
@@ -96,7 +99,7 @@ const TodayHighlights = () => {
                   {weatherStatement.main.humidity}%
                 </span>
               </div>
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <MdVisibility />
                   <span className=" text-xs sm:text-sm ">Visibility</span>
@@ -105,7 +108,7 @@ const TodayHighlights = () => {
                   {weatherStatement.visibility} mi
                 </span>
               </div>
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <FaThermometerEmpty />
                   <span className=" text-xs sm:text-sm ">Pressure </span>
@@ -114,7 +117,7 @@ const TodayHighlights = () => {
                   {weatherStatement.main.pressure} in
                 </span>
               </div>
-              <div className=" bg-custom-color/50 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
+              <div className=" bg-custom-color/30 backdrop-blur-sm rounded-md md:px-3 px-1 py-1 flex justify-between items-center ">
                 <p className=" flex gap-1 items-center">
                   <GiDew />
                   <span className=" text-xs sm:text-sm ">Dew point</span>

@@ -8,7 +8,10 @@ interface paramType {
 }
 
 export const fetchData = createAsyncThunk<any, paramType>("weather/fetchWeather", async ({city, units}):Promise<any>=>{
-  const data = (await apiCall("weather", { q: city }));
+  let data = (await apiCall("weather", { q: city || "London" }));
+  if(!data){
+    data = (await apiCall("weather", { q: "London" }));
+  }
   const { lat, lon } = data.coord;
   const weatherStatement = await apiCall("weather", { lat, lon, units });
   const hourlyStatement = await apiCall("forecast", { lat, lon, units });

@@ -3,8 +3,8 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CiLocationOn } from "react-icons/ci";
 import { TbCalendar } from "react-icons/tb";
 // import { stateType } from "../../Redux/weatherSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Redux/createStore";
+import {  useDispatch, useSelector } from "react-redux";
+import {  AppDispatch, RootState } from "../../Redux/createStore";
 import { timeAndDateWithTimestampAndTimezone } from "../../utils/timeCalcultion";
 import { fetchData } from "../../Redux/fetchData";
 
@@ -30,16 +30,17 @@ const iconMap: { [key: string]: string } = {
 };
 
 const DegreeShowcase = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.weather);
+  const dispatch = useDispatch<AppDispatch>()
 
   if (data?.status === "loading") {
     <div>Loading....</div>;
   }
 
+
   if (data?.status === "failed") {
-    alert("Enter a valid city name")
-    dispatch(fetchData({city:"Dhaka", units:"metric"}))
+    dispatch(fetchData({city: "London", units: "metric"}))
+    console.log("1st call")
   }
 
   const { weatherStatement }: any = data.weatherData;

@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../Redux/createStore";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../Redux/createStore";
 import { fetchData } from "../Redux/fetchData";
 
 interface CitySuggestion {
@@ -12,34 +12,34 @@ interface CitySuggestion {
 }
 
 const SearchBar = () => {
+  const status = useSelector((state:RootState)=>state.weather.status);
+  const dispatch = useDispatch<AppDispatch>();
   const [inputText, setInputeText] = useState<string>("");
-  const [city, setCity] = useState<string>("Dhaka");
+  const [city, setCity] = useState<string>("");
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
   const [suggestions, setSuggestions] = useState<CitySuggestion[]>([]);
-
-  const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(fetchData({ city, units }));
-  }, [dispatch, city, units]);
-
-  const inputHandler = async(e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target) {
-      const text = e.target.value as string;
-      setInputeText(text);
-      if (text.length > 2) {
-        await fetchCitySuggestions(text);
-      } else {
-        setSuggestions([]);
-      }
-    }
-  };
 
   const fetchCitySuggestions = async (query: string) => {
     const res = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=0fefc06467470fbdc6c6545407c150be`
     );
     const data = await res.json();
+    if(status === 'succeed'){
+      setSuggestions([])
+    }
     setSuggestions(data);
+  };
+
+  const inputHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target) {
+      const text = e.target.value as string;
+      setInputeText(text);
+      if (inputText.length > 2) {
+        await fetchCitySuggestions(text);
+      } else {
+        setSuggestions([]);
+      }
+    }
   };
 
   const selectCityHandler = (cityName: string) => {
@@ -53,7 +53,12 @@ const SearchBar = () => {
     e.preventDefault();
     setCity(inputText);
     setInputeText("");
+    setSuggestions([]);
   };
+
+  useEffect(() => {
+    dispatch(fetchData({ city, units }));
+  }, [dispatch, city, units]);
 
   return (
     <div className=" py-8 ">
@@ -76,12 +81,11 @@ const SearchBar = () => {
               <input
                 value={inputText}
                 onChange={(e) => inputHandler(e)}
-                type=" text "
                 placeholder= {city.length>2 ? city : "Search for city..."}
                 className=" w-full bg-custom-color/30 backdrop-blur-sm placeholder:text-slate-200 text-slate-200 p-2 rounded-l-md focus:ring-1 ring-slate-300 outline-none"
               />
               {suggestions.length > 0 && (
-                <ul className="absolute bg-white text-black w-full max-w-[60%] max-h-60 overflow-y-auto rounded-md mt-1 shadow-lg z-10">
+                <ul className="absolute bg-white text-black w-full lg:max-w-[60%] max-h-60 overflow-y-auto rounded-md mt-1 shadow-lg z-10">
                   {suggestions.map((suggestion, index) => (
                     <li
                       key={index}
